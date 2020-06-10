@@ -1,0 +1,21 @@
+version: "3.0"
+services:
+  code-server:
+    image: r-code-server:${VERSION}
+    container_name: ${CONTAINER_NAME}
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    restart: unless-stopped
+    environment:
+      - PUID=${USER_ID}
+      - PGID=${GROUP_ID}
+      - TZ=America/Chicago
+      - PASSWORD=${PASSWORD} #optional
+      - SUDO_PASSWORD=${SUDO_PASSWORD} #optional
+      - PROXY_DOMAIN=${PROXY_DOMAIN} #optional
+    volumes:
+      - ./:/config/workspace
+    ports:
+      - ${CODE_SERVER_PORT}:8443
+    command: code-server
