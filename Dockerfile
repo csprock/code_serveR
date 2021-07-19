@@ -1,3 +1,6 @@
+LABEL code_serveR
+LABEL VS Code with R
+
 FROM linuxserver/code-server:amd64-v3.4.0-ls46
 
 USER root
@@ -53,8 +56,7 @@ RUN APT_INSTALL="apt-get install -y --no-install-recommends" && \
 # Python
 # ------------------------------------------------------------------
     python-dev \
-    libxml2-dev \
-    libxslt-dev
+    libxml2-dev 
 
 # Install pip
 RUN curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
