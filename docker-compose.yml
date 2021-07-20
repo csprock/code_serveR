@@ -14,8 +14,8 @@ services:
       - PASSWORD=${PASSWORD} #optional
       - SUDO_PASSWORD=${SUDO_PASSWORD} #optional
       - PROXY_DOMAIN=${PROXY_DOMAIN} #optional
-    volumes:
-      - ./:/config/workspace
+    #volumes:
+    #  - ./:/config/workspace
     ports:
       - ${CODE_SERVER_PORT}:8443
     command: code-server
