@@ -73,3 +73,8 @@ RUN Rscript /tmp/install_packages.R && rm /tmp/install_packages.R
 
 # Install Radian console
 RUN pip3 install -U radian
+
+# Add VS Code extensions
+RUN code-server --extensions-dir /config/extensions --install-extension Ikuyadeu.r
+RUN code-server --extensions-dir /config/extensions --install-extension REditorSupport.r-lsp
+RUN code-server --extensions-dir /config/extensions --install-extension GrapeCity.gc-excelviewer
