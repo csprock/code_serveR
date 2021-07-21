@@ -1,6 +1,6 @@
 FROM linuxserver/code-server:amd64-latest 
 
-ARG R_VERSION=3.6.3
+ARG R_VERSION
 
 RUN apt-get update && \
     apt-get -y install ca-certificates && \
@@ -73,19 +73,3 @@ RUN Rscript /tmp/install_packages.R && rm /tmp/install_packages.R
 
 # Install Radian console
 RUN pip3 install -U radian
-
-# setting up directories
-#RUN chmod -R 777 /usr/local/lib/R
-#RUN chmod -R 777 /config
-#RUN mkdir -p /config/extensions
-
-# install extensions
-#RUN curl --retry 5 -JL https://marketplace.visualstudio.com/_apis/public/gallery/publishers/Ikuyadeu/vsextensions/r/0.6.1/vspackage | bsdtar -xvf - extension
-#RUN mv extension /config/extensions/ikuyadeu.r-0.6.1
-
-#RUN curl --retry 5 -JL  https://marketplace.visualstudio.com/_apis/public/gallery/publishers/REditorSupport/vsextensions/r-lsp/0.1.6/vspackage/ | bsdtar -xvf - extension
-#RUN mv extension /config/extensions/r-lsp-0.1.6
-
-
-
-
