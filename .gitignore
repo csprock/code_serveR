@@ -40,3 +40,6 @@ vignettes/*.pdf
 
 # Docker
 .env
+
+# Test directory mount for /config
+.appdata
