@@ -19,4 +19,9 @@ services:
       - INSTALL_EXTENSIONS=1
     ports:
       - ${CODE_SERVER_PORT}:8443
+    volumes:
+      - ${WORKSPACE_PATH}:/config/workspace
+      - ${APPDATA_PATH}:/config
+      - ./config/extension_list:/tmp/extension_list
+      - ./config/install_extensions.sh:/config/custom-cont-init.d/install_extensions
     command: code-server
