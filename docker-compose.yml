@@ -16,6 +16,7 @@ services:
       - PASSWORD=${PASSWORD}
       - SUDO_PASSWORD=${SUDO_PASSWORD}
       - PROXY_DOMAIN=${PROXY_DOMAIN}
+      - INSTALL_EXTENSIONS=1
     ports:
       - ${CODE_SERVER_PORT}:8443
     command: code-server

@@ -73,3 +73,7 @@ RUN Rscript /tmp/install_packages.R && rm /tmp/install_packages.R
 
 # Install Radian console
 RUN pip3 install -U radian
+
+# Add VS Code extensions
+COPY ./config/extension_list /tmp/extension_list
+COPY ./config/install_extensions.sh /config/custom-cont-init.d/install_extensions
