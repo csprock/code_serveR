@@ -15,7 +15,7 @@ services:
       - TZ=${TZ}
       - PASSWORD=${PASSWORD}
       - SUDO_PASSWORD=${SUDO_PASSWORD}
-      - INSTALL_EXTENSIONS=${INSTALL_EXTENSIONS}
+      - INSTALL_EXTENSIONS=true
     ports:
       - ${CODE_SERVER_PORT}:8443
     volumes:
