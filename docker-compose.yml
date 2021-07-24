@@ -1,7 +1,7 @@
 version: "3.0"
 services:
   code-server:
-    image: r-code-server:${VERSION}
+    image: ${IMAGE_NAME}:${VERSION}
     container_name: ${CONTAINER_NAME}
     build:
       context: ./
@@ -10,17 +10,15 @@ services:
         R_VERSION: ${R_VERSION}
     restart: unless-stopped
     environment:
-      - PUID=${USER_ID}
-      - PGID=${GROUP_ID}
+      - PUID=${PUID}
+      - PGID=${PGID}
       - TZ=${TZ}
       - PASSWORD=${PASSWORD}
       - SUDO_PASSWORD=${SUDO_PASSWORD}
-      - PROXY_DOMAIN=${PROXY_DOMAIN}
-      - INSTALL_EXTENSIONS=1
+      - INSTALL_EXTENSIONS=${INSTALL_EXTENSIONS}
     ports:
       - ${CODE_SERVER_PORT}:8443
     volumes:
       - ${WORKSPACE_PATH}:/config/workspace
       - ${APPDATA_PATH}:/config
-      - ./config/install_extensions.sh:/config/custom-cont-init.d/install_extensions
-    command: code-server
+      - ./env_config/install_extensions.sh:/config/custom-cont-init.d/install_extensions.sh
