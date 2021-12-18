@@ -86,9 +86,39 @@ RUN apt-get update \
 	&& rm -rf /var/lib/apt/lists/*
 
 
-# Install R packages
-COPY ./env_config/install_packages.R /tmp/install_packages.R
-RUN Rscript /tmp/install_packages.R && rm /tmp/install_packages.R
+# Install Tidyverse and vscode requirements
+RUN apt-get update -qq && apt-get -y --no-install-recommends install \
+  libxml2-dev \
+  libcairo2-dev \
+  libsqlite-dev \
+  libmariadbd-dev \
+  libmariadbclient-dev \
+  libpq-dev \
+  libssh2-1-dev \
+  unixodbc-dev \
+  libsasl2-dev \
+  # textshaping deps
+  libfribidi-dev \
+  libharfbuzz-dev \
+  libgit2-dev \
+  # ragg deps
+  libfreetype6-dev \
+  libpng-dev \
+  libjpeg-dev \
+  libtiff5-dev \
+  && install2.r --error \
+    --deps TRUE \
+    tidyverse \
+    dplyr \
+    devtools \
+    formatR \
+    remotes \
+    selectr \
+    caTools \ 
+#    BiocManager \
+    languageserver \
+    httpgd
+
 
 # Install Radian console
 RUN pip3 install -U radian
