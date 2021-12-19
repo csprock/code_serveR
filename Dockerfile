@@ -3,59 +3,55 @@ FROM linuxserver/code-server:amd64-latest
 ARG R_VERSION
 
 RUN apt-get update && \
-    apt-get -y install ca-certificates && \
-    apt-get clean
-
-RUN APT_INSTALL="apt-get install -y --no-install-recommends" && \
-    apt-get update && \
-# ==================================================================
-# tools
-# freetds: TDS for talking to MSSQL databases
-# unixodbc: ODBC driver
-# libssl-dev: OpenSSL
-# ------------------------------------------------------------------
-    DEBIAN_FRONTEND=noninteractive $APT_INSTALL \
-    build-essential \
-    libssl-dev \
-    libffi-dev \
-    libxslt-dev \
-    libxml2-dev \
-    libcurl4-openssl-dev \
-    cron \
-    libhiredis-dev \
-    unixodbc-dev \
-    unixodbc \
-    freetds-common \ 
-    freetds-bin \
-    freetds-dev \
-    tdsodbc \
-    libssh2-1-dev \
-    vim \
-    htop \
-    tmux \
-    whois \
-    software-properties-common \
-    gnupg2 \
-    libsodium-dev \
-    bsdtar \
-    && \
-# ==================================================================
-# shiny
-# ------------------------------------------------------------------
-    DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y sudo \
-    gdebi-core \
-    pandoc \
-    pandoc-citeproc \
-    libcurl4-gnutls-dev \
-    libcairo2-dev \
-    libxt-dev \
-    wget \
-# ==================================================================
-# Python
-# ------------------------------------------------------------------
-    python3-dev \
-    python3-pip
-
+    apt-get install -y --no-install-recommends \
+	bash-completion \
+	ca-certificates \
+	ed \
+	file \ 
+	fonts-texgyre \
+	g++ \
+	gfortran \
+	gsfonts \
+	less \
+	libblas-dev \
+	libbz2-1.0 \
+	libcairo2-dev \
+	libcurl4 \
+	libfreetype6-dev \
+	libfribidi-dev \
+	libgit2-dev \
+	libharfbuzz-dev \
+#	libicu63 \
+	libjpeg-dev \
+#	libjpeg62-dev \
+	liblzma5 \
+	libmariadbclient-dev \
+	libmariadbd-dev \
+	libopenblas-dev \
+	libpangocairo-1.0-0 \
+	libpcre3 \
+	libpng-dev \
+	libpng16-16 \
+	libpq-dev \
+	libreadline7 \
+	libsasl2-dev \
+	libsqlite-dev \
+	libssh2-1-dev \
+        libssl-dev \
+	libtiff5 \
+	libtiff5-dev \
+	libxml2-dev \
+	make \
+        software-properties-common \
+	unixodbc-dev \
+	unzip \
+	vim-tiny \
+	wget \
+        whois \
+	zip \
+	zlib1g \
+     && apt-get clean \
+     && rm -rf /var/lib/apt/lists/*
 
 
 ### Install R ### 
@@ -86,27 +82,8 @@ RUN apt-get update \
 	&& rm -rf /var/lib/apt/lists/*
 
 
-# Install Tidyverse and vscode requirements
-RUN apt-get update -qq && apt-get -y --no-install-recommends install \
-  libxml2-dev \
-  libcairo2-dev \
-  libsqlite-dev \
-  libmariadbd-dev \
-  libmariadbclient-dev \
-  libpq-dev \
-  libssh2-1-dev \
-  unixodbc-dev \
-  libsasl2-dev \
-  # textshaping deps
-  libfribidi-dev \
-  libharfbuzz-dev \
-  libgit2-dev \
-  # ragg deps
-  libfreetype6-dev \
-  libpng-dev \
-  libjpeg-dev \
-  libtiff5-dev \
-  && install2.r --error \
+# Install Tidyverse 
+RUN install2.r --error \
     --deps TRUE \
     tidyverse \
     dplyr \
@@ -120,6 +97,14 @@ RUN apt-get update -qq && apt-get -y --no-install-recommends install \
     httpgd
 
 
+### Install Pip3 ###
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    python3-dev \
+    python3-pip \
+    && python3 -m pip install --upgrade pip \
+    && pip3 install --upgrade setuptools
+    
 # Install Radian console
 RUN pip3 install -U radian
 
