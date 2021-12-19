@@ -104,7 +104,15 @@ RUN apt-get update && \
     python3-pip \
     && python3 -m pip install --upgrade pip \
     && pip3 install --upgrade setuptools
-    
+ 
+RUN add-apt-repository ppa:deadsnakes/ppa
+RUN apt-get update && apt-get install -y \
+    python3.9 \
+    python3.9-distutils \
+    && curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py \
+    && python3.9 get-pip.py \
+    && rm get-pip.py
+   
 # Install Radian console
 RUN pip3 install -U radian
 
