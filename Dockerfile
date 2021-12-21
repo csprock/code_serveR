@@ -107,7 +107,3 @@ RUN apt-get update && \
     
 # Install Radian console
 RUN pip3 install -U radian
-
-# Add VS Code extensions
-COPY ./env_config/extension_list /tmp/extension_list
-COPY ./env_config/install_extensions.sh /config/custom-cont-init.d/install_extensions.sh
