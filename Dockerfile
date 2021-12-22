@@ -1,13 +1,10 @@
-
-LABEL author="Carson Sprock <csprock@gmail.com>"
-LABEL source="https://github.com/csprock/code_server"
-LABEL description="Extends linuxserver/code-server image with R and rocker/tidyverse packages"
-
-
 FROM linuxserver/code-server:amd64-latest 
 
 ARG R_VERSION
 
+LABEL author="Carson Sprock <csprock@gmail.com>"
+LABEL source="https://github.com/csprock/code_server"
+LABEL description="Extends linuxserver/code-server image with R and rocker/tidyverse packages"
 LABEL rversion=${R_VERSION}
 
 RUN apt-get update && \
