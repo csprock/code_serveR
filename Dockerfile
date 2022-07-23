@@ -1,4 +1,4 @@
-FROM linuxserver/code-server:amd64-latest 
+FROM linuxserver/code-server:amd64-version-v3.10.2
 
 ARG R_VERSION
 
@@ -91,7 +91,6 @@ RUN apt-get update \
 RUN install2.r --error \
     --deps TRUE \
     tidyverse \
-    dplyr \
     devtools \
     formatR \
     remotes \
