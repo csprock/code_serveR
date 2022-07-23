@@ -19,6 +19,10 @@ build:
 	docker build . --tag csprock/vscodebase:${R_VERSION} \
 		--build-arg R_VERSION=${R_VERSION}
 
+push:	
+	docker image push csprock/vscodebase:{R_VERSION}
+
+
 test:
 	docker run  \
 		-e PUID=1000 \
